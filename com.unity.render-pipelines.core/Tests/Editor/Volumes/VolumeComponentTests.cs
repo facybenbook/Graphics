@@ -133,7 +133,7 @@ namespace UnityEngine.Rendering.Tests
             var component = ScriptableObject.CreateInstance<VolumeComponentDecorators>();
             var editor = (VolumeComponentEditor)Activator.CreateInstance(typeof(VolumeComponentEditor));
             editor.Invoke("Init", component, null);
-            
+
             var parameters =
                 editor.GetField("m_Parameters") as List<(GUIContent displayName, int displayOrder,
                     SerializedDataParameter param)>;
