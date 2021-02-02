@@ -21,7 +21,10 @@ namespace UnityEngine.Rendering.HighDefinition
             public TextureHandle outputBuffer;
         }
 
-        public TextureHandle Denoise(RenderGraph renderGraph, HDCamera hdCamera, TemporalFilterParameters tfParameters, TextureHandle noisyBuffer, TextureHandle historyBuffer, TextureHandle depthPyramid, TextureHandle normalBuffer, TextureHandle motionVectorBuffer)
+        public TextureHandle Denoise(RenderGraph renderGraph, HDCamera hdCamera, TemporalFilterParameters tfParameters,
+            TextureHandle noisyBuffer, TextureHandle velocityBuffer,
+            TextureHandle historyBuffer,
+            TextureHandle depthPyramid, TextureHandle normalBuffer, TextureHandle motionVectorBuffer)
         {
             using (var builder = renderGraph.AddRenderPass<TemporalFilterPassData>("TemporalDenoiser", out var passData, ProfilingSampler.Get(HDProfileId.TemporalFilter)))
             {
@@ -35,7 +38,7 @@ namespace UnityEngine.Rendering.HighDefinition
                 passData.normalBuffer = builder.ReadTexture(normalBuffer);
                 passData.motionVectorBuffer = builder.ReadTexture(motionVectorBuffer);
 
-                passData.velocityBuffer = renderGraph.defaultResources.blackTextureXR;
+                passData.velocityBuffer = builder.ReadTexture(velocityBuffer);
                 passData.noisyBuffer = builder.ReadTexture(noisyBuffer);
 
                 // Temporary buffers

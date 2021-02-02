@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Removed the material pass probe volumes evaluation mode.
+- The RTAO's history is now discarded if the occlusion caster was moving (case 1303418).
 
 ## [11.0.0] - 2020-10-21
 

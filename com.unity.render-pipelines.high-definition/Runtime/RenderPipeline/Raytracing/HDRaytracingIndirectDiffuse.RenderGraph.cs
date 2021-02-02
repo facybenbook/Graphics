@@ -234,7 +234,7 @@ namespace UnityEngine.Rendering.HighDefinition
                 // Run the temporal denoiser
                 TemporalFilterParameters tfParameters = temporalFilter.PrepareTemporalFilterParameters(hdCamera, false, historyValidity0);
                 TextureHandle historyBufferHF = renderGraph.ImportTexture(RequestIndirectDiffuseHistoryTextureHF(hdCamera));
-                TextureHandle denoisedRTGI = temporalFilter.Denoise(renderGraph, hdCamera, tfParameters, rtGIBuffer, historyBufferHF, depthPyramid, normalBuffer, motionVectorBuffer);
+                TextureHandle denoisedRTGI = temporalFilter.Denoise(renderGraph, hdCamera, tfParameters, rtGIBuffer, renderGraph.defaultResources.blackTextureXR, historyBufferHF, depthPyramid, normalBuffer, motionVectorBuffer);
 
                 // Apply the diffuse denoiser
                 DiffuseDenoiserParameters ddParams = diffuseDenoiser.PrepareDiffuseDenoiserParameters(hdCamera, false, giSettings.denoiserRadius, giSettings.halfResolutionDenoiser, giSettings.secondDenoiserPass);
@@ -248,7 +248,7 @@ namespace UnityEngine.Rendering.HighDefinition
                     // Run the temporal denoiser
                     tfParameters = temporalFilter.PrepareTemporalFilterParameters(hdCamera, false, historyValidity1);
                     TextureHandle historyBufferLF = renderGraph.ImportTexture(RequestIndirectDiffuseHistoryTextureLF(hdCamera));
-                    denoisedRTGI = temporalFilter.Denoise(renderGraph, hdCamera, tfParameters, rtGIBuffer, historyBufferLF, depthPyramid, normalBuffer, motionVectorBuffer);
+                    denoisedRTGI = temporalFilter.Denoise(renderGraph, hdCamera, tfParameters, rtGIBuffer, renderGraph.defaultResources.blackTextureXR, historyBufferLF, depthPyramid, normalBuffer, motionVectorBuffer);
 
                     // Apply the diffuse denoiser
                     ddParams = diffuseDenoiser.PrepareDiffuseDenoiserParameters(hdCamera, false, giSettings.denoiserRadius * 0.5f, giSettings.halfResolutionDenoiser, false);
